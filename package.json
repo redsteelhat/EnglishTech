@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf .next out"
+    "clean": "powershell -c \"Remove-Item -Recurse -Force .next, out -ErrorAction SilentlyContinue\""
   },
   "dependencies": {
     "react": "^18",
