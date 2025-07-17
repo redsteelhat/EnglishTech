@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Modern Next.js configuration
-  output: 'standalone',
+  // Modern Next.js configuration for Vercel
   images: {
     unoptimized: true,
   },
