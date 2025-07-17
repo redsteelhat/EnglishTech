@@ -2,6 +2,8 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Metadata, Viewport } from 'next'
 import React from 'react'
+import { AuthProvider } from '@/contexts/AuthContext'
+import { PaymentProvider } from '@/contexts/PaymentContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -38,7 +40,11 @@ export default function RootLayout({
   return (
     <html lang="tr" className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
-        {children}
+        <AuthProvider>
+          <PaymentProvider>
+            {children}
+          </PaymentProvider>
+        </AuthProvider>
       </body>
     </html>
   )
