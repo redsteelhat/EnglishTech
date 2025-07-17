@@ -1,16 +1,4 @@
 {
   "version": 2,
-  "name": "english-tech-landing",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
+  "name": "english-tech-landing"
 }
