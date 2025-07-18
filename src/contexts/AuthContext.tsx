@@ -6,6 +6,7 @@ interface User {
   id: string
   email: string
   name: string
+  role: 'student' | 'teacher' | 'superadmin'
   subscriptionPlan?: 'basic' | 'premium' | 'enterprise'
   isActive: boolean
 }
@@ -46,10 +47,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true)
     try {
       // TODO: Replace with actual API call
+      // Role assignment logic based on email domain or specific emails
+      let userRole: 'student' | 'teacher' | 'superadmin' = 'student'
+      
+      if (email === 'admin@englishtech.com') {
+        userRole = 'superadmin'
+      } else if (email.includes('teacher@') || email.includes('ogretmen@')) {
+        userRole = 'teacher'
+      }
+      
       const mockUser: User = {
         id: '1',
         email,
         name: email.split('@')[0],
+        role: userRole,
         subscriptionPlan: 'basic',
         isActive: true
       }
@@ -72,6 +83,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: Date.now().toString(),
         email,
         name,
+        role: 'student', // Default role for new registrations
         isActive: true
       }
       
