@@ -7,6 +7,10 @@ export * from './mock/courses'
 export * from './mock/payments'
 export * from './mock/communications'
 export * from './mock/database'
+export * from './mock/lessons'
+export * from './mock/security'
+export * from './mock/landingPage'
+export * from './mock/dashboard'
 
 // Utility functions for mock data
 export const getMockUserById = (id: string) => {

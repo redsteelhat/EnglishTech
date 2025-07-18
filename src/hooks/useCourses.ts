@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { mockCourses, mockLessons, Course, Lesson } from '@/data'
+import { mockCourses, Course } from '@/data'
 
 // Courses Hook
 export const useCourses = () => {
@@ -66,60 +66,4 @@ export const useCourses = () => {
   }
 }
 
-// Lessons Hook
-export const useLessons = (courseId?: string) => {
-  const [lessons, setLessons] = useState<Lesson[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      const filteredLessons = courseId 
-        ? mockLessons.filter(lesson => lesson.courseId === courseId)
-        : mockLessons
-      setLessons(filteredLessons)
-      setLoading(false)
-    }, 800)
-  }, [courseId])
-
-  const addLesson = (lesson: Lesson) => {
-    setLessons(prev => [...prev, lesson])
-  }
-
-  const updateLesson = (id: string, updates: Partial<Lesson>) => {
-    setLessons(prev => prev.map(lesson => 
-      lesson.id === id ? { ...lesson, ...updates } : lesson
-    ))
-  }
-
-  const deleteLesson = (id: string) => {
-    setLessons(prev => prev.filter(lesson => lesson.id !== id))
-  }
-
-  const getLessonById = (id: string) => {
-    return lessons.find(lesson => lesson.id === id)
-  }
-
-  const completeLesson = (id: string) => {
-    updateLesson(id, { isCompleted: true })
-  }
-
-  const unlockLesson = (id: string) => {
-    updateLesson(id, { isLocked: false })
-  }
-
-  const lockLesson = (id: string) => {
-    updateLesson(id, { isLocked: true })
-  }
-
-  return {
-    lessons,
-    loading,
-    addLesson,
-    updateLesson,
-    deleteLesson,
-    getLessonById,
-    completeLesson,
-    unlockLesson,
-    lockLesson
-  }
-}
+export default useCourses

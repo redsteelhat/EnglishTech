@@ -2,166 +2,85 @@
 
 import React from 'react'
 import { Clock, Users, Star, ArrowRight } from 'lucide-react'
+import { mockLandingPageCourses } from '@/data/mock/landingPage'
 
 const Courses = () => {
-  type CourseLevel = 'Beginner' | 'Intermediate' | 'Upper-Intermediate' | 'Advanced' | 'All Levels'
-  
-  interface Course {
-    id: number
-    title: string
-    description: string
-    level: CourseLevel
-    duration: string
-    students: string
-    rating: number
-    image: string
-    features: string[]
-  }
+  const courses = mockLandingPageCourses.slice(0, 6) // Show first 6 courses
 
-  const courses: Course[] = [
-    {
-      id: 1,
-      title: 'Başlangıç İngilizcesi',
-      description: 'Sıfırdan İngilizce öğrenmeye başlayın. Temel kelime bilgisi ve günlük konuşma pratiği.',
-      level: 'Beginner',
-      duration: '3 Ay',
-      students: '2,450',
-      rating: 4.9,
-      image: '/api/placeholder/400/250',
-      features: ['Temel Gramer', 'Günlük Konuşma', 'Kelime Bilgisi', 'Telaffuz Pratiği']
-    },
-    {
-      id: 2,
-      title: 'İş İngilizcesi',
-      description: 'Profesyonel kariyeriniz için gerekli olan iş İngilizcesi becerilerini geliştirin.',
-      level: 'Intermediate',
-      duration: '4 Ay',
-      students: '1,890',
-      rating: 4.8,
-      image: '/api/placeholder/400/250',
-      features: ['Sunum Teknikleri', 'E-posta Yazımı', 'Meeting Dili', 'Networking']
-    },
-    {
-      id: 3,
-      title: 'TOEFL Hazırlık',
-      description: 'TOEFL sınavında yüksek puan alabilmek için kapsamlı hazırlık programı.',
-      level: 'Advanced',
-      duration: '6 Ay',
-      students: '1,230',
-      rating: 4.9,
-      image: '/api/placeholder/400/250',
-      features: ['Reading Skills', 'Listening Practice', 'Speaking Tests', 'Writing Tasks']
-    },
-    {
-      id: 4,
-      title: 'Konuşma Pratiği',
-      description: 'Akıcı konuşma becerileri geliştirin. Gerçek yaşam senaryoları ile pratik yapın.',
-      level: 'All Levels',
-      duration: '2 Ay',
-      students: '3,120',
-      rating: 4.9,
-      image: '/api/placeholder/400/250',
-      features: ['Canlı Konuşma', 'Telaffuz Düzeltme', 'Güven Geliştirme', 'Akıcılık']
-    },
-    {
-      id: 5,
-      title: 'Akademik İngilizce',
-      description: 'Üniversite ve akademik çalışmalar için gerekli İngilizce becerilerini kazanın.',
-      level: 'Upper-Intermediate',
-      duration: '5 Ay',
-      students: '890',
-      rating: 4.7,
-      image: '/api/placeholder/400/250',
-      features: ['Akademik Yazım', 'Araştırma Teknikleri', 'Sunum Hazırlığı', 'Eleştirel Düşünme']
-    },
-    {
-      id: 6,
-      title: 'İngilizce Sınavları',
-      description: 'IELTS, Cambridge ve diğer uluslararası sınavlara hazırlık.',
-      level: 'Intermediate',
-      duration: '4 Ay',
-      students: '1,560',
-      rating: 4.8,
-      image: '/api/placeholder/400/250',
-      features: ['Sınav Stratejileri', 'Zaman Yönetimi', 'Örnek Sorular', 'Mock Testler']
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case 'Beginner':
+        return 'bg-green-100 text-green-800'
+      case 'Intermediate':
+        return 'bg-blue-100 text-blue-800'
+      case 'Advanced':
+        return 'bg-purple-100 text-purple-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
-  ]
-
-  const levelColors: Record<CourseLevel, string> = {
-    'Beginner': 'bg-green-100 text-green-800',
-    'Intermediate': 'bg-yellow-100 text-yellow-800',
-    'Upper-Intermediate': 'bg-orange-100 text-orange-800',
-    'Advanced': 'bg-red-100 text-red-800',
-    'All Levels': 'bg-blue-100 text-blue-800'
   }
 
   return (
-    <section id="courses" className="bg-gray-50 section-padding">
+    <section id="courses" className="section-padding bg-gray-50">
       <div className="container-max">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Popüler
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
-              {' '}Kurslarımız
-            </span>
+          <h2 className="heading-2 mb-4">
+            Popüler <span className="text-gradient">Kurslarımız</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Her seviyeye uygun, uzman eğitmenler tarafından hazırlanmış kurslar ile 
-            İngilizce hedeflerinize ulaşın.
+            Uzman eğitmenler eşliğinde, kendi hızınızda öğrenin. Her seviyeye uygun kurslarımızla İngilizce yolculuğunuza başlayın.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <div key={course.id} className="card p-6 group">
-              <div className="mb-4">
-                <div className="bg-gradient-to-r from-primary-100 to-secondary-100 h-48 rounded-lg mb-4 flex items-center justify-center">
-                  <div className="text-primary-600 font-semibold">Course Preview</div>
-                </div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${levelColors[course.level]}`}>
+            <div key={course.id} className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group">
+              <div className="relative overflow-hidden">
+                <img 
+                  src={course.thumbnail} 
+                  alt={course.title}
+                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getLevelColor(course.level)}`}>
                     {course.level}
                   </span>
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm text-gray-600">{course.rating}</span>
-                  </div>
+                </div>
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center space-x-1">
+                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium">{course.rating}</span>
                 </div>
               </div>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {course.title}
-              </h3>
               
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                {course.description}
-              </p>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center justify-between text-sm text-gray-500">
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                  {course.title}
+                </h3>
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  {course.description}
+                </p>
+                
+                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                   <div className="flex items-center space-x-1">
                     <Clock className="w-4 h-4" />
-                    <span>{course.duration}</span>
+                    <span>{course.duration} saat</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Users className="w-4 h-4" />
-                    <span>{course.students} öğrenci</span>
+                    <span>{course.totalStudents} öğrenci</span>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {course.features.map((feature, index) => (
-                    <span key={index} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
-                      {feature}
-                    </span>
-                  ))}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl font-bold text-primary-600">{course.price} ₺</span>
+                  </div>
+                  <button className="btn-primary group/btn flex items-center space-x-2">
+                    <span>İncele</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
-
-              <button className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold py-3 rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 flex items-center justify-center space-x-2 group-hover:scale-105">
-                <span>Kursa Katıl</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           ))}
         </div>
